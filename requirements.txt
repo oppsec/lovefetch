@@ -1,2 +1,4 @@
 psutil==5.7.2
 rich==6.2.0
+
+py-cpuinfo
