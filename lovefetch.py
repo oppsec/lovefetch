@@ -1,48 +1,47 @@
-import os
-import sys
-import socket
-import platform
-import cpuinfo
+#!/usr/bin/env python3
+
+from os import system
+from os import name as os_name
+from sys import platform as sys_platform
+from socket import gethostname as hostname
+from platform import platform as os_platform
+from platform import machine as machine_platform
+from cpuinfo  import get_cpu_info as cpu_info
 
 from psutil import virtual_memory, boot_time
-from rich import print
 from datetime import datetime, date
-from ascii import windows, linux, macos, unknow
+from ascii import *
+
+LOVEFETCH_VERSION = '1.0.0'
+
+hostUsername    = hostname()
+osPlatform      = os_platform()
+machinePlatform = machine_platform()
+cpuInfo         = cpu_info()['brand_raw']
+memory           = round(virtual_memory().total / (1024.0 ** 3), 2)
+dateToday       = date.today()
+upTime          = datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S")
 
 def clearTerminal():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-# Informations
-
-hostUsername = socket.gethostname() # Username
-osPlatform = platform.platform() # OS name
-machinePlatform = platform.machine() # Machine Platform (AMD64...)
-dateTime = date.today() # Current day
-upTime = datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S") # Boot time
-computerMemory = virtual_memory() # Computer memory
-getCPU = cpuinfo.get_cpu_info() # Get computer CPU
-computerCPU = getCPU['brand_raw'] # Get computer CPU name
+    system('cls' if os_name == 'nt' else 'clear')
 
 def lovefetch():
     clearTerminal()
 
-    if sys.platform.startswith('win'):
+    if sys_platform.startswith('win'):
         print(windows)
-    elif sys.platform.startswith('linux'):
+    elif sys_platform.startswith('linux'):
         print(linux)
-    elif sys.platform.startswith('darwin'):
-        print(macos)
     else:
-        print(unknow)
+        print(unknown)
 
-    print(f'[bold magenta] Username ~> {hostUsername} [/bold magenta]')
-    print(f'[bold magenta] Date ~> {dateTime} [/bold magenta]')
-    print(f'[bold magenta] OS ~> {osPlatform} [/bold magenta]')
-    print(f'[bold magenta] Uptime ~> {upTime} [/bold magenta]')
-    print(f'[bold magenta] Memory ~> {computerMemory.total} [/bold magenta]')
-    print(f'[bold magenta] CPU ~> {computerCPU} [/bold magenta]')
-    print(f'[bold magenta] Machine Platform ~> {machinePlatform} [/bold magenta] \n')
-    print('[bold green] Lovefetch version ~> 1.0.0 [/bold green]')
-
+    print(f'[bold magenta] Username\t\t~> {hostUsername} [/bold magenta]')
+    print(f'[bold magenta] Date\t\t\t~> {dateToday} [/bold magenta]')
+    print(f'[bold magenta] OS\t\t\t~> {osPlatform} [/bold magenta]')
+    print(f'[bold magenta] Uptime\t\t\t~> {upTime} [/bold magenta]')
+    print(f'[bold magenta] Memory\t\t\t~> {memory} GB [/bold magenta]')
+    print(f'[bold magenta] CPU\t\t\t~> {cpuInfo} [/bold magenta]')
+    print(f'[bold magenta] Machine Platform\t~> {machinePlatform} [/bold magenta]\n')
+    print(f'[bold green] Lovefetch version: {LOVEFETCH_VERSION} [/bold green]')
 
 lovefetch()
