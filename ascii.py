@@ -84,7 +84,7 @@ MMMMMMMMMMMNyo/::/+sydNMMMMMMNmhso//:/+sdMMMMMMMMM
 
 """
 
-unknow = """
+unknown = """
      .... NO! ...                  ... MNO! ...
    ..... MNO!! ...................... MNNOO! ...
  ..... MMNO! ......................... MNNOO!! .
