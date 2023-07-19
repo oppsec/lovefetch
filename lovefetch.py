@@ -7,6 +7,7 @@ from socket import gethostname as hostname
 from platform import platform as os_platform
 from platform import machine as machine_platform
 from cpuinfo  import get_cpu_info as cpu_info
+from getpass import getuser
 
 from psutil import virtual_memory, boot_time
 from datetime import datetime, date
@@ -14,7 +15,8 @@ from ascii import *
 
 LOVEFETCH_VERSION = '1.0.0'
 
-hostUsername    = hostname()
+userName = getuser() 
+hostName   = hostname()
 osPlatform      = os_platform()
 machinePlatform = machine_platform()
 cpuInfo         = cpu_info()['brand_raw']
@@ -35,7 +37,8 @@ def lovefetch():
     else:
         print(unknown)
 
-    print(f'[bold magenta] Username\t\t~> {hostUsername} [/bold magenta]')
+    print(f'[bold magenta] Username\t\t~> {userName} [/bold magenta]')
+    print(f'[bold magenta] Hostname\t\t~> {hostName} [/bold magenta]')
     print(f'[bold magenta] Date\t\t\t~> {dateToday} [/bold magenta]')
     print(f'[bold magenta] OS\t\t\t~> {osPlatform} [/bold magenta]')
     print(f'[bold magenta] Uptime\t\t\t~> {upTime} [/bold magenta]')
